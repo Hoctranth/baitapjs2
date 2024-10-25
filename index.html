@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container-main">
+        <div class="row">
+            <div class="main">
+                <div class="search">
+                    <input type="text" id="search" placeholder="nhập tên xe" onchange="seachListCar()">
+                    <input type="button" value="Gửi" onclick="seachListCar()">
+                </div>
+                <div class="btn">
+                    <button class="btn open-button" onclick="openForm()">Thêm</button>
+                </div>
+            </div>
+            <div id="formPopup">
+                <label for="bienso">Biển số xe</label>
+                <input type="text" id="bienso" placeholder="Nhập biển số xe" name="bienso" required>
+    
+                <label for="loaixe">Loại xe</label>
+                <input type="text" id="loaixe" placeholder="Nhập loại xe" name="loaixe" required>
+    
+                <label for="giodau">Giờ đậu xe</label>
+                <input type="text" id="giodauxe" placeholder="Nhập giờ đậu xe" name="giodau" required>
+                <button type="button" class="btn" onclick="addListCar()">Lưu</button>
+                <button type="button" class="btn btn-cancel" onclick="closeForm()">Huỷ</button>
+            </div>
+            <div class="body">
+                <div class="list">
+                    <h3>Danh sách Car</h3>
+                    <div id="listCar"></div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
