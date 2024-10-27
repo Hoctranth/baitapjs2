@@ -223,7 +223,7 @@ body {
     background-color: #c82333; /* Màu khi hover nút hủy */
 }
 
-#formPopup1 {
+.formPopup1 {
     display: none; /* Ẩn form sửa mặc định */
     position: absolute;
     background: white;
@@ -236,19 +236,19 @@ body {
     transform: translateX(-50%);
 }
 
-#formPopup1 label {
+.formPopup1 label {
     display: block;
     margin: 10px 0 5px;
 }
 
-#formPopup1 input[type="text"], #formPopup1 input[type="radio"] {
+.formPopup1 input[type="text"], #formPopup1 input[type="radio"] {
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-#formPopup1 .btn {
+.formPopup1 .btn {
     background-color: #007BFF;
     color: white;
     padding: 10px;
@@ -257,18 +257,18 @@ body {
     cursor: pointer;
 }
 
-#formPopup1 .btn:hover {
+.formPopup1 .btn:hover {
     background-color: #0056b3;
 }
-#formPopup1 input[type="text"]{
+.formPopup1 input[type="text"]{
     width: 250px;
 }
 
-#formPopup1 .btn-cancel {
+.formPopup1 .btn-cancel {
     background-color: #dc3545; /* Đỏ cho nút hủy */
 }
 
-#formPopup1 .btn-cancel:hover {
+.formPopup1 .btn-cancel:hover {
     background-color: #c82333;
 }
 

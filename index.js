@@ -4,11 +4,11 @@
 // Biển số xe
 // Loại xe
 // Số giờ muốn đậu lại
-function openForm(){
-    document.getElementById("formPopup").style.display="block";
+function openForm() {
+    document.getElementById("formPopup").style.display = "block";
 }
-function closeForm(){
-    document.getElementById("formPopup").style.display="none";
+function closeForm() {
+    document.getElementById("formPopup").style.display = "none";
 }
 
 let arrListCar;
@@ -16,17 +16,17 @@ const result = document.getElementById("listCar");
 var search = document.getElementById("search");
 const bienso = document.getElementById('bienso');
 
-var renderLocal =JSON.parse(localStorage.getItem('arrListCar'));
-if(renderLocal){
+var renderLocal = JSON.parse(localStorage.getItem('arrListCar'));
+if (renderLocal) {
     arrListCar = renderLocal;
 }
-else{
-    arrListCar=[];
+else {
+    arrListCar = [];
 }
 
 getListCar();
 
-function getListCar(){
+function getListCar() {
     //tạo table
     render(renderLocal)
 }
@@ -34,76 +34,79 @@ function getListCar(){
 
 
 // Viết function check giá trị trong radio
-function getDataRadioInput(){
+function getDataRadioInput() {
     const selecRadio = document.querySelector('input[name="loaixe"]:checked')
-    if(selecRadio){
+    if (selecRadio) {
         return selecRadio.value
     }
 }
 
-
-function addListCar(){
+function addListCar() {
     // khởi tạo object
-    const listCar = {
+    const objectCar = {
         bienso: bienso.value,
         loaixe: getDataRadioInput(),
         giodauxe: giodauxe.value,
-        lastModify:""
+        lastModify: ""
     }
-    console.log(listCar)
-    var flag = false;
-    for(var i = 0; i<arrListCar.length;i++){
-        console.log(i)
-        var b = arrListCar[i];
-        if(b.bienso==bienso.value){
-            flag = true;
-            break;
-        }
-    }
-    if(flag ==false){
-        arrListCar.push(listCar)
+    console.log(objectCar)
+    var flag = searchArrListCar(arrListCar, bienso.value);
+    if (flag == -1) {
+        arrListCar.push(objectCar)
         localStorage.setItem('arrListCar', JSON.stringify(arrListCar));
     }
     getListCar();
     console.log(arrListCar)
 }
-console.log(search)
 
-function seachListCar(){
-    var arr2 =[];
-    if(search.value==""){
-        render(arrListCar);
-    }else
-    {
-        for(var i = 0;i<arrListCar.length;i++){
+function seachListCar() {
+    var arr2 = [];
+    if (search.value == "") {
+        getListCar();
+    } else {
+        for (var i = 0; i < arrListCar.length; i++) {
             var b = arrListCar[i];
-            if(b.bienso==search.value||b.loaixe==search.value){
+            if (b.bienso == search.value || b.loaixe == search.value) {
                 arr2.push(b);
             }
         }
         console.log(arr2)
+        var index = searchArrListCar(arrListCar, search.value)
+        var b = arrListCar[index];
         render(arr2)
         console.log(arr2)
     }
-    
+
 }//valu search > 0
-
-
-function render(list){
+// index trar về -1 nếu không tim thấy
+// giá trị thì trả về null 
+function searchArrListCar(arrListCar1, bienso) {
+    var index = -1;
+    for (var i = 0; i < arrListCar1.length; i++) {
+        var b = arrListCar1[i];
+        if (b.bienso == bienso || b.loaixe == bienso) {
+            return i;
+        }
+    }
+    return index;
+}
+// index trar về -1 nếu không tim thấy
+// giá trị thì trả về null 
+function render(list) {
     let table = '<table border ="1"><tr><th>STT</th><th>Biển số</th><th>Loại xe</th><th>Giờ đậu xe</th><th>Thời gian cập nhật</th><th>Chức năng</th></tr>';
-    list.forEach((car,index) =>{
+    list.forEach((car, index) => {
         console.log(car.bienso + "tôi là giá trị trong form")
         table += `<tr>
-            <td>${index+1}</td>
+            <td>${index + 1}</td>
             <td>${car.bienso}</td>
             <td>${car.loaixe}</td>
             <td>${car.giodauxe}</td>
-            <td>${car.lastModify||"Chưa có"}</td>
+            <td>${car.lastModify || "Chưa có"}</td>
             <td>
-                <button class="btn open-button" onclick=" openForm1(); loadCar('${car.bienso}')">Sửa</button>
-                <div id="formPopup1">
+                <button class="btn open-button" onclick="loadCar('${car.bienso}')">Sửa</button>
+                <div id="formPopup-${car.bienso}" class="formPopup1">
                     <label for="bienso1">Biển số xe</label>
-                    <input type="text" id="bienso1" placeholder="Nhập biển số xe" name="bienso1" disabled>
+                    <input type="text" id="bienso-${car.bienso}" placeholder="Nhập biển số xe" name="bienso1" disabled>
     
                     <label for="loaixe1">Loại xe</label>
                     <input type="radio" class="loaixe1" name="loaixe1" value="HONDA"> HONDA
@@ -113,77 +116,79 @@ function render(list){
                     <input type="text" id="giodauxe1" placeholder="Nhập giờ đậu xe" name="giodau1"  required>
                     
                     <button type="button" class="btn" onclick="updateCar()">Lưu</button>
-                    <button type="button" class="btn btn-cancel" onclick="closeForm1()">Huỷ</button>
+                    <button type="button" class="btn btn-cancel" onclick="closeForm1(${car.bienso})">Huỷ</button>
                 </div>
                 <button class="btn delete-button" onclick="deleteCar()">Xoá</button>
             </td>
         </tr>`
     });
-    table+=`</table>`
-    result.innerHTML=table;  
+    table += `</table>`
+    result.innerHTML = table;
 }
 
 const giodauxe = document.getElementById('giodauxe');
-const bienso1 = document.getElementById('bienso1');
-const loaixe1 = document.getElementById('loaixe1');
-const giodauxe1 = document.getElementById('giodauxe1');
-
-function openForm1(){
-    document.getElementById("formPopup1").style.display="block";
-}
-function closeForm1(){
-    document.getElementById("formPopup1").style.display="none";
-}
 var selectBienSo = null;
-function loadCar(bienso2){
+function openForm1(bienso) {
+    if (selectBienSo != null) {
+        closeForm1(selectBienSo)
+    }
+    document.getElementById(`formPopup-${bienso}`).style.display = "block";
+}
+function closeForm1(bienso) {
+    document.getElementById(`formPopup-${bienso}`).style.display = "none";
+}
+function loadCar(bienso2) {
+    openForm1(bienso2);
+    console.log(selectBienSo)
     selectBienSo = bienso2;
-    for(var i = 0; i<arrListCar.length;i++){
+    var i = searchArrListCar(arrListCar, bienso2)
+    if (i > -1) {
         var b = arrListCar[i];
-        console.log(bienso2+ " tôi là giá trị update")
-        if(b.bienso==bienso2){
-            console.log(arrListCar[i])
-            bienso1.value = b.bienso;
-            giodauxe1.value = b.giodauxe;
-            const checkRadio = document.querySelector(`input[name="loaixe1"][value="${b.loaixe}"]`);
-            if(checkRadio){
-                checkRadio.checked=true;
-            }
-            break;
+        document.getElementById(`bienso-${b.bienso}`).value = b.bienso;
+        document.getElementById('giodauxe1').value = b.giodauxe;
+        const checkRadio = document.querySelector(`input[name="loaixe1"][value="${b.loaixe}"]`);
+        if (checkRadio) {
+            checkRadio.checked = true;
         }
     }
 }
-function getDataRadioInput1(){
+function getDataRadioInput1() {
     const selecRadio = document.querySelector('input[name="loaixe1"]:checked')
-    if(selecRadio){
+    if (selecRadio) {
         return selecRadio.value
     }
 }
-function updateCar(){
-    for(var i = 0; i<arrListCar.length;i++){
-        var b = arrListCar[i];
-        if(b.bienso==selectBienSo){
-            b.loaixe = getDataRadioInput1();
-            b.giodauxe = giodauxe1.value;
-            b.lastModify = new Date().toLocaleString();
-            arrListCar[i] = b;
-            localStorage.setItem('arrListCar', JSON.stringify(arrListCar));
-            getListCar();
-            loadCar(selectBienSo)
-            break;
-        }
+function updateCar() {
+    var i = searchArrListCar(arrListCar, selectBienSo);
+    if (i > -1) {
+        var b = arrListCar[i]
+        b.loaixe = getDataRadioInput1();
+        b.giodauxe = document.getElementById('giodauxe1').value;
+        b.lastModify = new Date().toLocaleString();
+        arrListCar[i] = b;
+        localStorage.setItem('arrListCar', JSON.stringify(arrListCar));
+        getListCar();
+        loadCar(selectBienSo)
     }
 }
-function deleteCar(){
+function deleteCar() {
     // tìm được vị trí cần xoá
-    for(var i = 0; i< arrListCar.length; i++){
+    for (var i = 0; i < arrListCar.length; i++) {
         var b = arrListCar[i];
-        if(b.bienso == selectBienSo){
-            arrListCar.splice(i,1)
+        if (b.bienso == selectBienSo) {
+            arrListCar.splice(i, 1)
             localStorage.setItem('arrListCar', JSON.stringify(arrListCar));
             // arrListCar[i] = b
             getListCar();
             break;
         }
+    }
+    var i = searchArrListCar(arrListCar, selectBienSo);
+    if (i > -1) {
+        arrListCar.splice(i, 1)
+        localStorage.setItem('arrListCar', JSON.stringify(arrListCar));
+        // arrListCar[i] = b
+        getListCar();
     }
 }
 
