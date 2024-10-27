@@ -1,6 +1,274 @@
-#formPopup{
-    display: none;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-#formPopup1{
-    display: none;
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
 }
+
+.container-main {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search {
+    margin-bottom: 20px;
+}
+
+.search input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search input[type="button"], .search .open-button1 {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search input[type="button"]:hover, .search .open-button1 :hover {
+    background-color: #0056b3;
+}
+
+
+.btn {
+    margin: 10px 0;
+}
+
+.open-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.open-button:hover {
+    background-color: #218838;
+}
+
+#formPopup {
+    display: none; /* Ẩn form popup mặc định */
+    position: absolute;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#formPopup label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#formPopup input[type="text"], #formPopup input[type="radio"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#formPopup .btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#formPopup .btn-cancel {
+    background-color: #dc3545; /* Đỏ cho nút hủy */
+}
+
+#formPopup .btn:hover {
+    background-color: #0056b3;
+}
+
+#formPopup .btn-cancel:hover {
+    background-color: #c82333;
+}
+
+#formPopup input[type="text"]{
+    width: 250px;
+}
+
+.body {
+    margin-top: 20px;
+}
+
+.list {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.list h3 {
+    margin-bottom: 15px;
+}
+
+#listCar {
+    overflow-x: auto; /* Cho phép cuộn ngang */
+}
+
+#listCar table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#listCar table, #listCar th, #listCar td {
+    border: 1px solid #ccc;
+}
+
+#listCar th, #listCar td {
+    padding: 10px;
+    text-align: left;
+}
+
+#listCar th {
+    background-color: #f8f9fa;
+}
+
+#listCar tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+
+/* js */
+#listCar table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#listCar table, #listCar th, #listCar td {
+    border: 1px solid #ccc;
+}
+
+#listCar th, #listCar td {
+    padding: 10px;
+    text-align: left;
+}
+
+#listCar th {
+    background-color: #f8f9fa;
+}
+
+#listCar tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn.open-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #0011ff; /* Màu xanh cho nút sửa */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn.open-button:hover {
+    background-color: #0056b3; /* Màu khi hover nút sửa */
+}
+
+.btn.delete-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #cc1c1c; /* Màu xanh cho nút sửa */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn.delete-button:hover {
+    background-color: #9c3636;; /* Màu khi hover nút sửa */
+}
+
+.btn.btn-cancel {
+    background-color: #dc3545; /* Màu đỏ cho nút hủy */
+}
+
+.btn.btn-cancel:hover {
+    background-color: #c82333; /* Màu khi hover nút hủy */
+}
+
+#formPopup1 {
+    display: none; /* Ẩn form sửa mặc định */
+    position: absolute;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#formPopup1 label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+#formPopup1 input[type="text"], #formPopup1 input[type="radio"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#formPopup1 .btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#formPopup1 .btn:hover {
+    background-color: #0056b3;
+}
+#formPopup1 input[type="text"]{
+    width: 250px;
+}
+
+#formPopup1 .btn-cancel {
+    background-color: #dc3545; /* Đỏ cho nút hủy */
+}
+
+#formPopup1 .btn-cancel:hover {
+    background-color: #c82333;
+}
+

@@ -10,12 +10,11 @@
     <div class="container-main">
         <div class="row">
             <div class="main">
+                <h2>PHẦN MỀM QUẢN LÝ XE</h2>
                 <div class="search">
-                    <input type="text" id="search" placeholder="nhập tên xe" onchange="seachListCar()">
+                    <input type="text" id="search" placeholder="Nhập tên xe" onchange="seachListCar()">
                     <input type="button" value="Gửi" onclick="seachListCar()">
-                </div>
-                <div class="btn">
-                    <button class="btn open-button" onclick="openForm()">Thêm</button>
+                    <button class="btn open-button1" onclick="openForm()">Thêm</button>
                 </div>
             </div>
             <div id="formPopup">
@@ -23,8 +22,8 @@
                 <input type="text" id="bienso" placeholder="Nhập biển số xe" name="bienso" required>
     
                 <label for="loaixe">Loại xe</label>
-                <input type="text" id="loaixe" placeholder="Nhập loại xe" name="loaixe" required>
-    
+                <input type="radio" class="loaixe" name="loaixe" value="HONDA" onchange="getDataRadioInput()"> HONDA
+                <input type="radio" class="loaixe" name="loaixe" value="MEC" onchange="getDataRadioInput()"> MEC
                 <label for="giodau">Giờ đậu xe</label>
                 <input type="text" id="giodauxe" placeholder="Nhập giờ đậu xe" name="giodau" required>
                 <button type="button" class="btn" onclick="addListCar()">Lưu</button>
