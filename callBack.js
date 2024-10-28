@@ -11,7 +11,7 @@ function helloCallBack(){
         })
     },2000)
 }
-helloCallBack()
+// helloCallBack()
 // DOne callback
 // Promise 
 function fetchData(url){
@@ -32,7 +32,7 @@ function onSucces(url){
 function onErr(url){
     console.log(url)
 }
-fetchData("https://api.example.com/data/a").then(onSucces,onErr )
+// fetchData("https://api.example.com/data/a").then(onSucces,onErr )
 // Done Promise
 
 function task1(){
@@ -74,4 +74,34 @@ async function runTasks(){
 
     console.timeEnd("Total Time");
 }
-runTasks()
+// runTasks()
+
+
+
+async function start() {
+    var a = new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve(1)
+        },2000)
+    })
+    a.then(b=>{
+        console.log(b)
+        return b-1;
+    }
+    ).then(c =>{
+        console.log(c)
+    })
+    
+    new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve(2)
+        },2000)
+    })
+
+    new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve(3)
+        },2000)
+    })
+} 
+start()
